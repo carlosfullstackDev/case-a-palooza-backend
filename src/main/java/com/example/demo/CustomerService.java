@@ -27,7 +27,7 @@ public class CustomerService {
 
     public Customers getCustomerById(Long customerId) {
 
-        return null;
+        return repository.findById(customerId).get();
     }
 
 
