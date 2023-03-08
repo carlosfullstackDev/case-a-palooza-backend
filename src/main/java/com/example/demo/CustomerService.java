@@ -4,6 +4,8 @@ package com.example.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CustomerService {
 
@@ -15,8 +17,8 @@ public class CustomerService {
     return null;
     }
 
-    public Customers deleteCustomer(Long customerId) {
-        return null;
+    public void deleteCustomer(Long customerId) {
+        repository.deleteById(customerId);
     }
 
 
@@ -25,9 +27,9 @@ public class CustomerService {
         return repository.save(customers);
     }
 
-    public Customers getCustomerById(Long customerId) {
+    public Optional<Customers> getCustomerById(Long customerId) {
 
-        return repository.findById(customerId).get();
+        return repository.findById(customerId);
     }
 
 

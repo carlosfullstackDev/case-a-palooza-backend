@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
@@ -16,11 +18,11 @@ public class CustomerController {
 
     @GetMapping("/{customerId}")
     public ResponseEntity<Customers> getCustomer(@PathVariable Long customerId) {
-        Customers customers = customerService.getCustomerById(customerId);
-        if (customers == null) {
+        Optional<Customers> customers = customerService.getCustomerById(customerId);
+        if (!customers.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(customers, HttpStatus.OK);
+        return new ResponseEntity<>(customers.get(), HttpStatus.OK);
     }
 
     @PostMapping
@@ -40,11 +42,9 @@ public class CustomerController {
 
     @DeleteMapping("/{customerId}")
     public ResponseEntity<Customers> deleteCustomer(@PathVariable Long customerId) {
-        Customers deletedCustomers = customerService.deleteCustomer(customerId);
-        if (deletedCustomers == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(deletedCustomers, HttpStatus.OK);
+        customerService.deleteCustomer(customerId);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
