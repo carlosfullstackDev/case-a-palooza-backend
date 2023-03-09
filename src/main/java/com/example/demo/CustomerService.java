@@ -12,9 +12,23 @@ public class CustomerService {
     @Autowired
     CustomerRepository repository;
 
-    public Customers updateCustomer(Long customerId, Customers customers) {
+    public void updateCustomer(Long customerId, Customers customers) {
 
-    return null;
+        Optional<Customers> customer = repository.findById(customerId);
+
+        if(customer.isPresent()){
+            customer.get().setFirstName(customers.getFirstName());
+            customer.get().setEmail(customers.getEmail());
+            customer.get().setLastName(customers.getLastName());
+
+            repository.save(customer.get());
+        }
+        else{
+
+            //todo add a response entity in this part
+            System.out.println("Error user does not exists");
+        }
+
     }
 
     public void deleteCustomer(Long customerId) {

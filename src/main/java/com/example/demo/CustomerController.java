@@ -33,11 +33,9 @@ public class CustomerController {
 
     @PutMapping("/{customerId}")
     public ResponseEntity<Customers> updateCustomer(@PathVariable Long customerId, @RequestBody Customers customers) {
-        Customers updatedCustomers = customerService.updateCustomer(customerId, customers);
-        if (updatedCustomers == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(updatedCustomers, HttpStatus.OK);
+         customerService.updateCustomer(customerId, customers);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{customerId}")
