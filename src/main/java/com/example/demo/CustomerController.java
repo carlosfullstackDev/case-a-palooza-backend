@@ -17,16 +17,12 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @GetMapping("/{customerId}")
-    public ResponseEntity<Customers> getCustomer(@PathVariable Long customerId) {
+    @GetMapping("/{customerId}") public ResponseEntity<Customers> getCustomer(@PathVariable Long customerId) {
         Optional<Customers> customers = customerService.getCustomerById(customerId);
         if (!customers.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
         return new ResponseEntity<>(customers.get(), HttpStatus.OK);
     }
-
-
 
     @GetMapping("/getAllCustomers")
     public ResponseEntity<List<Customers>> getAllCustomers() {

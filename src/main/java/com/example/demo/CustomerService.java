@@ -62,9 +62,14 @@ public class CustomerService {
     }
 
 
-    public List<Customers> getAllCustomers() {
+    public List<Customers> getAllCustomers() throws  Exception {
 
-        return repository.findAll();
+        if(repository.findAll().isEmpty()){
+            throw  new Exception();
+        }else {
+            return repository.findAll();
+        }
+
     }
 
 
