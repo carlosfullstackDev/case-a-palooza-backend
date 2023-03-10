@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -25,17 +26,32 @@ public class CustomerController {
         return new ResponseEntity<>(customers.get(), HttpStatus.OK);
     }
 
+
+
+    @GetMapping("/getAllCustomers")
+    public ResponseEntity<List<Customers>> getAllCustomers() {
+        try {
+            List<Customers> customers = customerService.getAllCustomers();
+            return ResponseEntity.ok(customers);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     @PostMapping
     public ResponseEntity<Customers> createCustomer(@RequestBody Customers customers) {
-        Customers createdCustomers = customerService.createCustomer(customers);
-        return new ResponseEntity<>(createdCustomers, HttpStatus.CREATED);
+        Optional<Customers> createdCustomers = customerService.createCustomer(customers);
+
+        return createdCustomers.map(customer -> new ResponseEntity<>(customer, HttpStatus.CREATED))
+                .orElse(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+
     }
 
     @PutMapping("/{customerId}")
     public ResponseEntity<Customers> updateCustomer(@PathVariable Long customerId, @RequestBody Customers customers) {
-         customerService.updateCustomer(customerId, customers);
+        ResponseEntity<Customers>  response = customerService.updateCustomer(customerId, customers);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return response;
     }
 
     @DeleteMapping("/{customerId}")
