@@ -10,4 +10,10 @@ class CaseAPaloozaProductServiceApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	void sampleTest(){
+		System.out.println("This is a sample test");
+		assert(true);
+	}
+
 }
