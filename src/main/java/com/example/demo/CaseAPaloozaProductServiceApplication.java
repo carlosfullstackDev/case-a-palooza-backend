@@ -11,7 +11,7 @@ public class CaseAPaloozaProductServiceApplication {
 
 	public static void main(String[] args) {
 		
-		System.out.println("jenkins test");
+		System.out.println("Lillie from pokemon");
 		
 		SpringApplication.run(CaseAPaloozaProductServiceApplication.class, args);
 	}
