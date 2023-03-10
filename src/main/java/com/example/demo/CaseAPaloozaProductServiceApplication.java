@@ -11,7 +11,6 @@ public class CaseAPaloozaProductServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CaseAPaloozaProductServiceApplication.class, args);
-		System.out.println("prueba jenkins pipeline");
 	}
 
 }
