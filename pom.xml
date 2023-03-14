@@ -14,7 +14,8 @@
 	<name>case-a-palooza-customers-service</name>
 	<description>backend microservice for handling customers</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.source.version>1.8</java.source.version>
+		<java.target.version>1.8</java.target.version>
 	</properties>
 	<dependencies>
 		
